@@ -7,9 +7,6 @@ const e = require("express");
 
 const router = Router();
 
-
-
-
 router.post("/register", validateSession, async function (req, res) {
   User.register({
     firstName:req.body.user.firstName,

@@ -11,6 +11,7 @@ User.hasMany(Idea);
 Idea.belongsTo(User);
 
 Idea.hasMany(Comment);
+Comment.belongsTo(Idea);
 
 module.exports = {
   User,
