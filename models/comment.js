@@ -6,12 +6,11 @@ const Comment = db.define('comment', {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-      },
+    },
       description: {
-            type: DataTypes.STRING(2500),
-            allowNull: false,
-        }
+        type: DataTypes.STRING(2500),
+        allowNull: false,
+    }
 })
-
 
 module.exports = Comment

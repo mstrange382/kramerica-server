@@ -5,26 +5,27 @@ const User = db.define("user", {
   firstName: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: true
   },
   lastName: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: true
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: true
   },
   passwordhash: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true
   },
   admin:{
     type: DataTypes.BOOLEAN,
     allowNull: false,
-    default: true,
+    default: true
   }
 
 });
