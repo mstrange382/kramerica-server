@@ -30,39 +30,39 @@ router.post("/register", async function (req, res) {
       })
     })
     
-  .catch(e)
-    res.status(500).json({message: e.message})
+  .catch(error)
+    res.status(500).json({message: error})
   
 });
 
-// router.post("/login", async function (req, res) {
-//   console.log(process.env.JWT_SECRET);
-//   User.findOne({
-// 		where: {
-// 			email: req.body.user.email,
-// 		},
-// 	})
-//   .then(function loginSuccess(user) {
-//     if (user) {
-//       let token = jwt.sign(
-//         { id: user.id, email: user.email },
-//         process.env.JWT_SECRET,
-//         { expiresIn: 60 * 60 * 24 }
-//       );
+router.post("/login", validateSession, async function (req, res) {
+  console.log(process.env.JWT_SECRET);
+  User.findOne({
+		where: {
+			email: req.body.email,
+		},
+	})
+  .then(function loginSuccess(user) {
+    if (user) {
+      let token = jwt.sign(
+        { id: user.id },
+        process.env.JWT_SECRET,
+        { expiresIn: 60 * 60 * 24 }
+      );
 
-//       res.status(200).json({
-//         user: user,
-//         message: "User successfully logged in!",
-//         sessionToken: token,
-//       });
-//     } else {
-//       res.status(500).json({ error: "user does not exist." });
-//     }
-//   })
+      res.status(200).json({
+        user: user,
+        message: "User successfully logged in!",
+        sessionToken: token,
+      });
+    } else {
+      res.status(500).json({ error: "user does not exist." });
+    }
+  })
 
-//   .catch(e)
-//     res.status(500).json({message: e.message})
+  .catch(error)
+    res.status(500).json({message: error})
   
-// });
+});
 
 module.exports = router;
