@@ -14,7 +14,8 @@ const Idea = db.define("idea", {
   description: {
         type: DataTypes.STRING(2500),
         allowNull: false,
-    }
+    },
+    
 
 });
 
