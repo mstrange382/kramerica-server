@@ -5,13 +5,13 @@ const Comment = require('./comment')
 
 // Setup Associations
 User.hasMany(Comment);
-Comment.belongsTo(User);
-
 User.hasMany(Idea);
-Idea.belongsTo(User);
 
 Idea.hasMany(Comment);
+Idea.belongsTo(User);
+
 Comment.belongsTo(Idea);
+Comment.belongsTo(User);
 
 module.exports = {
   User,

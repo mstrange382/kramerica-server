@@ -8,8 +8,8 @@ router.post("/create", validateSession, function (req, res) {
         name: req.body.name,
 		category: req.body.category,
         description: req.body.description,
-		userId: req.user.id,
-		ideaId: req.idea.id,
+		ideaId: req.body.ideaId,
+		userId: req.user.id
 	};
 	// const query = { where: { id: req.params.id, userId: req.user.id } };
 	Comment.create(commentEntry)

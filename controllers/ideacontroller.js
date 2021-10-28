@@ -14,7 +14,7 @@ router.post("/create", validateSession, function (req, res) {
         name: req.body.name,
 		category: req.body.category,
         description: req.body.description,
-		userId: req.id,
+		userId: req.user.id,
 	};
 	Idea.create(ideaEntry)
 		.then((ideas) => res.status(200).json(ideas))

@@ -19,7 +19,7 @@ app.use(Express.json());
 app.use(middlewares.CORS)
 app.use("/user", controllers.User);
 app.use('/idea', controllers.Idea);
-app.use('./comment', controllers.Comment)
+app.use('/comment', controllers.Comment)
 
 const resetDatabase = {force:true}
 db.authenticate()

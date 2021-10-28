@@ -15,10 +15,7 @@ const Comment = db.define('comment', {
         type: DataTypes.STRING(2500),
         allowNull: false,
     },
-    owner: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
+    
 
 })
 
