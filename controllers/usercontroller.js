@@ -34,34 +34,38 @@ router.post("/register", async function (req, res) {
   
 });
 
-router.post("/login", validateSession, async function (req, res) {
+router.post("/login", function (req, res) {
   console.log(process.env.JWT_SECRET);
   User.findOne({
-		where: {
-			email: req.body.email,
-		},
-	})
-  .then(function loginSuccess(user) {
-    if (user) {
-      let token = jwt.sign(
-        { id: user.id },
-        process.env.JWT_SECRET,
-        { expiresIn: 60 * 60 * 24 }
-      );
-
-      res.status(200).json({
-        user: user,
-        message: "User successfully logged in!",
-        sessionToken: token,
-      });
-    } else {
-      res.status(500).json({ error: "user does not exist." });
-    }
+    where: {
+      firstName:req.body.firstName 
+    },
   })
-
-  .catch(error)
-    res.status(500).json({message: error})
-  
+    .then(function loginSuccess(user) {
+      if (user) {
+        bcrypt.compare(req.body.passwordhash, user.passwordhash, (err, match) => {
+          if (match) {
+            let token = jwt.sign(
+              { id: user.id, email: user.email },
+              process.env.JWT_SECRET,
+              { expiresIn: 60 * 60 * 270 }
+            );
+            res.status(200).json({
+              user: user,
+              message: "User successfully logged in!",
+              sessionToken: token,
+            });
+          } else {
+            res.status(403).json({ error: "Password is incorrect" });
+          }
+        });
+      } else {
+        res.status(500).json({ error: "User does not exist." });
+      }
+    })
+    .catch((err) => res.status(500).json({ error: err }));
 });
 
+
 module.exports = router;
+

@@ -29,6 +29,7 @@ router.put("/update/:id", validateSession, function (req, res) {
         description: req.body.description
 	};
 	const query = { where: { id: req.params.id, userId: req.user.id } };
+
 	Idea.update(updateIdeaEntry, query)
 		.then((ideas) =>
 			res.status(200).json({ message: "The Submission has been updated." })
@@ -38,6 +39,7 @@ router.put("/update/:id", validateSession, function (req, res) {
 
 router.delete("/delete/:id", validateSession, function (req, res) {
 	const query = { where: { id: req.params.id, userId:req.user.id } };
+	
 	Idea.destroy(query)
 		.then(() =>
 			res.status(200).json({ message: "Your Submission has been DESTROYED!!!!" })

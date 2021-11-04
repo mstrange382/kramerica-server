@@ -1,11 +1,9 @@
 require("dotenv").config();
 const Express = require("express");
 const db = require("./db");
-
-
 let sequelize = require("./db");
-
 const app = Express();
+
 
 // Import middlewares as a bundle
 const middlewares = require("./middleware");
@@ -16,7 +14,8 @@ const controllers = require("./controllers");
 // Parse the body of all requests as JSON
 sequelize.sync();
 app.use(Express.json());
-app.use(middlewares.CORS)
+// app.use(middlewares.CORS)
+app.use(require('./middleware/headers'))
 app.use("/user", controllers.User);
 app.use('/idea', controllers.Idea);
 app.use('/comment', controllers.Comment)

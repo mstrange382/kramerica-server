@@ -11,7 +11,7 @@ router.post("/create", validateSession, function (req, res) {
 		ideaId: req.body.ideaId,
 		userId: req.user.id
 	};
-	// const query = { where: { id: req.params.id, userId: req.user.id } };
+	
 	Comment.create(commentEntry)
 		.then((comment) => res.status(200).json(comment))
 		.catch((err) => res.status(500).json({ error: err }));
@@ -19,19 +19,25 @@ router.post("/create", validateSession, function (req, res) {
 
 router.put("/update/:id", validateSession, function (req, res) {
 	const updateCommentEntry = {
-		name: req.body.comment.name,
-        description: req.body.comment.description,
+		name: req.body.name,
+        description: req.body.description,
+		ideaId: req.body.ideaId,
+		
 	};
-	const query = { where: { id: req.params.id, owner: req.user.id } };
+	const query = { where: { id: req.params.id,
+		 userId: req.user.id } };
+
 	Comment.update(updateCommentEntry, query)
 		.then((comments) =>
-			res.status(200).json({ message: "Your Coment has been updated." })
+			res.status(200).json({ message: "Your Comment has been updated." })
 		)
 		.catch((err) => res.status(500).json({ error: err }));
 });
 
 router.delete("/delete/:id", validateSession, function (req, res) {
-	const query = { where: { id: req.params.id, owner: req.user.id } };
+	const query = { where: { id: req.params.id,
+		userId: req.user.id } };
+
 	Comment.destroy(query)
 		.then(() =>
 			res.status(200).json({ message: "Your Comment has been DESTROYED!!!!" })
