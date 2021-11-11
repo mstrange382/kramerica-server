@@ -5,7 +5,6 @@ const Comment = db.define('comment', {
     name: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
     },
     category: {
         type: DataTypes.STRING,

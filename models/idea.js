@@ -5,7 +5,7 @@ const Idea = db.define("idea", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    
   },
   category: {
       type: DataTypes.STRING,

@@ -3,11 +3,11 @@ let router = express.Router();
 let validateSession = require("../middleware/validate-session");
 const { Idea } = require("../models");
 
-router.get("/practice", validateSession, function (req, res) {
-	res.send("hey! This is a practice route!");
-});
+// router.get("/practice", validateSession, function (req, res) {
+// 	res.send("hey! This is a practice route!");
+// });
 
-console.log("ideacontroller, line 10");
+// console.log("ideacontroller, line 10");
 
 router.post("/create", validateSession, function (req, res) {
 	const ideaEntry = {
@@ -47,30 +47,30 @@ router.delete("/delete/:id", validateSession, function (req, res) {
 		.catch((err) => res.status(500).json({ error: err }));
 });
 
-// router.get("/", function (req, res) {
-// 	Idea.findAll()
-// 		.then((idea) => res.status(200).json(idea))
-// 		.catch((err) => res.status(500).json({ error: err }));
-// });
-// console.log("idea controller, line 30");
+router.get("/", function (req, res) {
+	Idea.findAll()
+		.then((idea) => res.status(200).json(idea))
+		.catch((err) => res.status(500).json({ error: err }));
+});
+console.log("idea controller, line 30");
 
-// router.get("/mine", validateSession, function (req, res) {
-// 	let userid = req.user.id;
-// 	Idea.findAll({
-// 		where: { owner: userid },
-// 	})
-// 		.then((idea) => res.status(200).json(idea))
-// 		.catch((err) => res.status(500).json({ error: err }));
-// });
+router.get("/mine", validateSession, function (req, res) {
+	let userid = req.user.id;
+	Idea.findAll({
+		where: { owner: userid },
+	})
+		.then((idea) => res.status(200).json(idea))
+		.catch((err) => res.status(500).json({ error: err }));
+});
 
-// router.get("/:category", function (req, res) {
-// 	let category = req.params.category;
-// 	Idea.findAll({
-// 		where: { category: category },
-// 	})
-// 		.then((idea) => res.status(200).json(idea))
-// 		.catch((err) => res.status(500).json({ error: err }));
-// });
+router.get("/:category", function (req, res) {
+	let category = req.params.category;
+	Idea.findAll({
+		where: { category: category },
+	})
+		.then((idea) => res.status(200).json(idea))
+		.catch((err) => res.status(500).json({ error: err }));
+});
 
 
 
